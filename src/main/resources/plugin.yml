@@ -1,0 +1,5 @@
+name: PixelmonEconomyBridge
+version: 1.0.1a
+author: EverNife
+main: br.com.finalcraft.pixelmoneconomybridge.PixelmonEconomyBridge
+depend: [ FinalEconomy ]
