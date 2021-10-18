@@ -1,7 +1,7 @@
 package br.com.finalcraft.pixelmoneconomybridge.listener;
 
-import br.com.finalcraft.evernifecore.ListenerHelper;
-import br.com.finalcraft.evernifecore.util.FCBukkitUtil;
+import br.com.finalcraft.evernifecore.listeners.base.ECListener;
+import br.com.finalcraft.evernifecore.util.FCScheduller;
 import br.com.finalcraft.finaleconomy.api.events.EconomyUpdateEvent;
 import br.com.finalcraft.pixelmoneconomybridge.PixelmonEconomyBridge;
 import com.pixelmonmod.pixelmon.Pixelmon;
@@ -10,20 +10,15 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class PlayerListenerGlobal implements Listener{
-
-    public static void registerIfPossible(){
-        ListenerHelper.registerEvents(new PlayerListenerGlobal());
-    }
+public class PlayerListenerGlobal implements ECListener {
 
     @EventHandler(ignoreCancelled = false, priority = EventPriority.MONITOR)
     public void onEconomyUpdateEvent(EconomyUpdateEvent event) {
 
-        FCBukkitUtil.runAssync(() -> {
+        FCScheduller.runAssync(() -> {
             if (event.getPlayerData().isPlayerOnline()){
                 EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(event.getPlayerData().getUniqueId());
                 UpdateClientPlayerData updateClientPlayerData = new UpdateClientPlayerData(event.getPlayerData().getMoneyWrapper().intValue());

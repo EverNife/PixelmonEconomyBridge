@@ -1,5 +1,6 @@
 package br.com.finalcraft.pixelmoneconomybridge;
 
+import br.com.finalcraft.evernifecore.listeners.base.ECListener;
 import br.com.finalcraft.pixelmoneconomybridge.listener.PlayerListenerGlobal;
 import br.com.finalcraft.pixelmoneconomybridge.pixelmon.BukkitPixelmonBankAccountManager;
 import com.pixelmonmod.pixelmon.Pixelmon;
@@ -26,7 +27,7 @@ public class PixelmonEconomyBridge extends JavaPlugin{
             public void run() {
                 info("§aIntegrating Pixelmon to FinalEconomy...");
                 Pixelmon.moneyManager = new BukkitPixelmonBankAccountManager();
-                PlayerListenerGlobal.registerIfPossible();
+                ECListener.register(PixelmonEconomyBridge.this, PlayerListenerGlobal.class);
             }
         }.runTaskLater(this, 1);//Only execute after the entire server is up and running
     }
