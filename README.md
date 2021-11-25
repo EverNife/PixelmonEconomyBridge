@@ -6,6 +6,7 @@ On bukkit there is no 'EconomyUpdatEvent' so you might need a plugin that has it
 
 So. In order to use this plugin you need:
 
-+ Vault Plugin
-+ https://github.com/evernife/FinalEconomy
-+ https://github.com/evernife/EverNifeCore
++ [Vault Plugin](https://www.spigotmc.org/resources/vault.34315/)
++ [EverNifeCore Plugin](https://github.com/evernife/EverNifeCore)
++ Any other economy manager plugin like Essentials, CMI, or the best option for increased performance, [FinalEconomy](https://github.com/evernife/FinalEconomy
+  )
