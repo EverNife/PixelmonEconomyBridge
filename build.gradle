@@ -19,7 +19,7 @@ buildscript {
 }
 
 group 'br.com.finalcraft'
-version '1.0.1a'
+version '1.0.2'
 
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.forge'
