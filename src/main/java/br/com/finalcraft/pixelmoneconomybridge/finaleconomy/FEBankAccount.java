@@ -1,15 +1,15 @@
-package br.com.finalcraft.pixelmoneconomybridge.pixelmon;
+package br.com.finalcraft.pixelmoneconomybridge.finaleconomy;
 
 import br.com.finalcraft.finaleconomy.config.data.FEPlayerData;
 import com.pixelmonmod.pixelmon.api.economy.IPixelmonBankAccount;
 
 import java.util.UUID;
 
-public class BukkitPixelmonBankAccount implements IPixelmonBankAccount {
+public class FEBankAccount implements IPixelmonBankAccount {
 
     private final FEPlayerData playerData;
 
-    public BukkitPixelmonBankAccount(FEPlayerData playerData) {
+    public FEBankAccount(FEPlayerData playerData) {
         this.playerData = playerData;
     }
 

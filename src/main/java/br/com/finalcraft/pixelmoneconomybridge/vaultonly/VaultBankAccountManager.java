@@ -1,22 +1,22 @@
-package br.com.finalcraft.pixelmoneconomybridge.pixelmon;
+package br.com.finalcraft.pixelmoneconomybridge.vaultonly;
 
-import br.com.finalcraft.evernifecore.config.playerdata.PlayerController;
-import br.com.finalcraft.finaleconomy.config.data.FEPlayerData;
 import com.pixelmonmod.pixelmon.api.economy.IPixelmonBankAccount;
 import com.pixelmonmod.pixelmon.api.economy.IPixelmonBankAccountManager;
 import net.minecraft.entity.player.EntityPlayerMP;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public class BukkitPixelmonBankAccountManager implements IPixelmonBankAccountManager {
+public class VaultBankAccountManager implements IPixelmonBankAccountManager {
 
     @Override
     public Optional<? extends IPixelmonBankAccount> getBankAccount(UUID uuid) {
-        FEPlayerData playerData = PlayerController.getPDSection(uuid, FEPlayerData.class);
+        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
 
-        if (playerData != null){
-            return Optional.of(new BukkitPixelmonBankAccount(playerData));
+        if (offlinePlayer != null){
+            return Optional.of(new VaultBankAccount(uuid, offlinePlayer));
         }
 
         return Optional.empty();

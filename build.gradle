@@ -19,7 +19,7 @@ buildscript {
 }
 
 group 'br.com.finalcraft'
-version '1.0.2'
+version '1.0.3'
 
 apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -48,6 +48,7 @@ repositories {
         name = "forge"
         url = "http://files.minecraftforge.net/maven"
     }
+    maven { url 'https://jitpack.io' }
     maven {
         url = 'https://maven.petrus.dev/public'
     }
@@ -62,6 +63,8 @@ minecraft {
 }
 
 dependencies {
+    compile "com.github.MilkBowl:VaultAPI:1.7"
+
     compile 'br.com.finalcraft:EverNifeCore:2.0.1'
     compile 'br.com.finalcraft:FinalEconomy:1.0.2'
 
