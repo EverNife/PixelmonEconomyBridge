@@ -32,14 +32,14 @@ public class PixelmonEconomyBridge extends JavaPlugin{
     public void onEnable() {
         instance = this;
 
-        if (!Bukkit.getPluginManager().isPluginEnabled("EverNifeCore")){
-            warning("You need EverNifeCore to run this plugin!");
-            return;
-        }
-
         new BukkitRunnable(){
             @Override
             public void run() {
+                if (!Bukkit.getPluginManager().isPluginEnabled("EverNifeCore")){
+                    warning("You need EverNifeCore to run this plugin!");
+                    return;
+                }
+
                 info("§aIntegrating Pixelmon to Bukkit...");
 
                 ECListener.register(PixelmonEconomyBridge.this, PlayerLoginListener.class);
