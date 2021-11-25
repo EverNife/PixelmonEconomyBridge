@@ -42,7 +42,7 @@ public class FEUpdateListener implements ECListener {
                 }
 
             }
-        }.runTaskTimerAsynchronously(PixelmonEconomyBridge.instance, 20, 20);
+        }.runTaskTimerAsynchronously(PixelmonEconomyBridge.instance, 20, 5);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
