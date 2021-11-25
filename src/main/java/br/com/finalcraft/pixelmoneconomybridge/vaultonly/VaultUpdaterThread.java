@@ -38,16 +38,17 @@ public class VaultUpdaterThread{
 
                 }
 
-                FCScheduller.runSync(() -> { //Do sync as we do not know how good this VaultPlugin has created his system
-                    for (Player player : playersToUpdate) {
-                        if (player.isOnline()){
-                            Pixelmon.moneyManager.getBankAccount(player.getUniqueId()).ifPresent(iPixelmonBankAccount -> {
-                                iPixelmonBankAccount.updatePlayer(iPixelmonBankAccount.getMoney());
-                            });
+                if (playersToUpdate.size() > 0){
+                    FCScheduller.runSync(() -> { //Do sync as we do not know how good this VaultPlugin has created his system
+                        for (Player player : playersToUpdate) {
+                            if (player.isOnline()){
+                                Pixelmon.moneyManager.getBankAccount(player.getUniqueId()).ifPresent(iPixelmonBankAccount -> {
+                                    iPixelmonBankAccount.updatePlayer(iPixelmonBankAccount.getMoney());
+                                });
+                            }
                         }
-                    }
-                });
-
+                    });
+                }
             }
         }.runTaskTimerAsynchronously(PixelmonEconomyBridge.instance, 1,20);
     }
