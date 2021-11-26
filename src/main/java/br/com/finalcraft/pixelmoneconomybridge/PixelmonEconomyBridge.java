@@ -2,8 +2,11 @@ package br.com.finalcraft.pixelmoneconomybridge;
 
 import br.com.finalcraft.evernifecore.listeners.base.ECListener;
 import br.com.finalcraft.evernifecore.metrics.Metrics;
+import br.com.finalcraft.pixelmoneconomybridge.commands.CommandRegisterer;
+import br.com.finalcraft.pixelmoneconomybridge.config.ConfigManager;
 import br.com.finalcraft.pixelmoneconomybridge.finaleconomy.FEBankAccountManager;
 import br.com.finalcraft.pixelmoneconomybridge.finaleconomy.FEUpdateListener;
+import br.com.finalcraft.pixelmoneconomybridge.integration.IntegrationType;
 import br.com.finalcraft.pixelmoneconomybridge.listener.PlayerLoginListener;
 import br.com.finalcraft.pixelmoneconomybridge.vaultonly.VaultBankAccountManager;
 import br.com.finalcraft.pixelmoneconomybridge.vaultonly.VaultUpdaterThread;
@@ -28,6 +31,8 @@ public class PixelmonEconomyBridge extends JavaPlugin{
         instance.getLogger().warning("[Warning] " + msg);
     }
 
+    public static IntegrationType INTEGRATION_TYPE = null;
+
     @Override
     public void onEnable() {
         instance = this;
@@ -40,20 +45,27 @@ public class PixelmonEconomyBridge extends JavaPlugin{
                     return;
                 }
 
-                info("§aIntegrating Pixelmon to Bukkit...");
+                info("§aRegistering Commands...");
+                CommandRegisterer.registerCommands(PixelmonEconomyBridge.this);
 
+                info("§aLoading up Configurations...");
+                ConfigManager.initialize(PixelmonEconomyBridge.this);
+
+                info("§aIntegrating Pixelmon to Bukkit...");
                 ECListener.register(PixelmonEconomyBridge.this, PlayerLoginListener.class);
 
                 if (Bukkit.getPluginManager().isPluginEnabled("FinalEconomy")){
                     info("FinalEconomy was found!");
-                    info("HighPerformance full-async synchronization enabled!");
+                    info("HighPerformance full-async Instant Synchronization enabled!");
                     Pixelmon.moneyManager = new FEBankAccountManager();
                     ECListener.register(PixelmonEconomyBridge.this, FEUpdateListener.class);
+                    INTEGRATION_TYPE = IntegrationType.FINAL_ECONOMY;
                 }else {
                     info("Vault was found!");
-                    info("Dedicated Thread sync synchronization enabled!");
+                    info("Dedicated Thread Delayed Synchronization enabled!");
                     Pixelmon.moneyManager = new VaultBankAccountManager();
                     VaultUpdaterThread.initialize();
+                    INTEGRATION_TYPE = IntegrationType.GENERIC_VAULT;
                 }
 
                 new Metrics(instance, 13410); //PixelmonEconomyBridge bstats

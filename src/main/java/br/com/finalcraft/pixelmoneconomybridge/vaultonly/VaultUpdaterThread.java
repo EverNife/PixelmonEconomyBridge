@@ -3,6 +3,7 @@ package br.com.finalcraft.pixelmoneconomybridge.vaultonly;
 import br.com.finalcraft.evernifecore.integration.VaultIntegration;
 import br.com.finalcraft.evernifecore.util.FCScheduller;
 import br.com.finalcraft.pixelmoneconomybridge.PixelmonEconomyBridge;
+import br.com.finalcraft.pixelmoneconomybridge.config.PEBSettings;
 import com.pixelmonmod.pixelmon.Pixelmon;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -50,7 +51,7 @@ public class VaultUpdaterThread{
                     });
                 }
             }
-        }.runTaskTimerAsynchronously(PixelmonEconomyBridge.instance, 1,20);
+        }.runTaskTimerAsynchronously(PixelmonEconomyBridge.instance, 1, PEBSettings.vault_syncInterval);
     }
 
 }
