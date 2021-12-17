@@ -23,7 +23,9 @@ public class VaultBankAccount implements IPixelmonBankAccount {
 
     @Override
     public void setMoney(int amount) {
-        VaultIntegration.ecoSet(offlinePlayer, amount);
+        double current = VaultIntegration.econ.getBalance(offlinePlayer);
+        VaultIntegration.econ.withdrawPlayer(offlinePlayer, current);
+        VaultIntegration.econ.depositPlayer(offlinePlayer, amount);
     }
 
     @Override

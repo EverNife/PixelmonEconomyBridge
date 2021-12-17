@@ -1,8 +1,8 @@
 package br.com.finalcraft.pixelmoneconomybridge.vaultonly;
 
+import br.com.finalcraft.evernifecore.integration.VaultIntegration;
 import com.pixelmonmod.pixelmon.api.economy.IPixelmonBankAccount;
 import com.pixelmonmod.pixelmon.api.economy.IPixelmonBankAccountManager;
-import net.minecraft.entity.player.EntityPlayerMP;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
@@ -15,16 +15,11 @@ public class VaultBankAccountManager implements IPixelmonBankAccountManager {
     public Optional<? extends IPixelmonBankAccount> getBankAccount(UUID uuid) {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
 
-        if (offlinePlayer != null){
-            return Optional.of(new VaultBankAccount(uuid, offlinePlayer));
+        if (!VaultIntegration.econ.hasAccount(offlinePlayer)){
+            VaultIntegration.econ.createPlayerAccount(offlinePlayer);
         }
 
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<? extends IPixelmonBankAccount> getBankAccount(EntityPlayerMP entityPlayerMP) {
-        return this.getBankAccount(entityPlayerMP.getUniqueID());
+        return Optional.of(new VaultBankAccount(uuid, offlinePlayer));
     }
 
 }
