@@ -1,5 +1,6 @@
 package br.com.finalcraft.pixelmoneconomybridge;
 
+import br.com.finalcraft.evernifecore.autoupdater.SpigotUpdateChecker;
 import br.com.finalcraft.evernifecore.listeners.base.ECListener;
 import br.com.finalcraft.evernifecore.metrics.Metrics;
 import br.com.finalcraft.pixelmoneconomybridge.commands.CommandRegisterer;
@@ -50,6 +51,13 @@ public class PixelmonEconomyBridge extends JavaPlugin{
 
                 info("§aLoading up Configurations...");
                 ConfigManager.initialize(PixelmonEconomyBridge.this);
+
+                SpigotUpdateChecker.checkForUpdates(
+                        PixelmonEconomyBridge.this,
+                        "97889", //PixelmonEconomyBridge SpigotID: 97889
+                        ConfigManager.getMainConfig()
+                );
+
 
                 info("§aIntegrating Pixelmon to Bukkit...");
                 ECListener.register(PixelmonEconomyBridge.this, PlayerLoginListener.class);
