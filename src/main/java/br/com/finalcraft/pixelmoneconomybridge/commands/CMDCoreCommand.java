@@ -1,6 +1,7 @@
 package br.com.finalcraft.pixelmoneconomybridge.commands;
 
 import br.com.finalcraft.evernifecore.commands.finalcmd.annotations.FinalCMD;
+import br.com.finalcraft.evernifecore.util.FCMessageUtil;
 import br.com.finalcraft.pixelmoneconomybridge.PermissionNodes;
 import br.com.finalcraft.pixelmoneconomybridge.PixelmonEconomyBridge;
 import br.com.finalcraft.pixelmoneconomybridge.config.ConfigManager;
@@ -25,7 +26,7 @@ public class CMDCoreCommand {
             }
         }
 
-        sender.sendMessage("§2§l ▶ §aPixelmonEconomyBridge was Realoded!");
+        FCMessageUtil.pluginHasBeenReloaded(sender, "PixelmonEconomyBridge");
     }
 
 }

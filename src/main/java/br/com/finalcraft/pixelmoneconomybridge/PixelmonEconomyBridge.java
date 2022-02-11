@@ -58,7 +58,6 @@ public class PixelmonEconomyBridge extends JavaPlugin{
                         ConfigManager.getMainConfig()
                 );
 
-
                 info("§aIntegrating Pixelmon to Bukkit...");
                 ECListener.register(PixelmonEconomyBridge.this, PlayerLoginListener.class);
 
