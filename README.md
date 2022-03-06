@@ -1,3 +1,5 @@
+[![Discord](https://img.shields.io/discord/899151012290498620.svg?label=discord&logo=discord)](https://discord.petrus.dev/)
+
 # PixelmonEconomyBridge
 
 A plugin de that creates a bridge between Pixelmon economy system and Bukkit.
