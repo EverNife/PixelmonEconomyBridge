@@ -1,17 +1,7 @@
 buildscript {
     repositories {
-        mavenCentral()
-        flatDir {
-            dirs 'libs'
-        }
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
@@ -44,10 +34,6 @@ repositories {
         name = 'spigotmc-repo'
         url = 'https://hub.spigotmc.org/nexus/content/groups/public/'
     }
-    maven {
-        name = "forge"
-        url = "http://files.minecraftforge.net/maven"
-    }
     maven { url 'https://jitpack.io' }
     maven {
         url = 'https://maven.petrus.dev/public'
@@ -56,17 +42,19 @@ repositories {
 
 
 minecraft {
-    version = "1.12.2-14.23.4.2705"
-    mappings = "stable_39"
+    version = "1.12.2-14.23.5.2847"
+    runDir = "run"
 
+    mappings = "stable_39"
     makeObfSourceJar = false
 }
+
 
 dependencies {
     compile "com.github.MilkBowl:VaultAPI:1.7"
 
-    compile 'br.com.finalcraft:EverNifeCore:2.0.1'
-    compile 'br.com.finalcraft:FinalEconomy:1.0.2'
+    compile 'br.com.finalcraft:EverNifeCore:2.0.2'
+    compile 'br.com.finalcraft:FinalEconomy:1.0.3'
 
     compileOnly name: "Pixelmon-1.12.2-8.3.4-noassets"
 
