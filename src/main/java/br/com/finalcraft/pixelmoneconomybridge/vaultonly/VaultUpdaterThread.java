@@ -17,7 +17,7 @@ import java.util.UUID;
 public class VaultUpdaterThread{
 
     private static BukkitTask bukkitTask;
-    private static HashMap<UUID, Double> PLAYERS_LAST_MONEY_AMOUNT = new HashMap<>();
+    public static HashMap<UUID, Double> PLAYERS_LAST_MONEY_AMOUNT = new HashMap<>();
 
     public static void initialize(){
         if (bukkitTask != null){

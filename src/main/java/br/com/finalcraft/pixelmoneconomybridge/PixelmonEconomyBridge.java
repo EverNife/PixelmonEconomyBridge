@@ -70,6 +70,7 @@ public class PixelmonEconomyBridge extends JavaPlugin{
                     info("Dedicated Thread Delayed Synchronization enabled!");
                     Pixelmon.moneyManager = new VaultBankAccountManager();
                     VaultUpdaterThread.initialize();
+                    ECListener.register(PixelmonEconomyBridge.this, VaultLogoutListener.class);
                     INTEGRATION_TYPE = IntegrationType.GENERIC_VAULT;
                 }
             }
