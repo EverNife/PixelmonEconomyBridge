@@ -33,7 +33,7 @@ public class VaultUpdaterThread_v1_16_5 {
                     Double currentBalance = VaultIntegration.ecoGet(onlinePlayer);
                     Double oldBalance = PLAYERS_LAST_MONEY_AMOUNT.put(onlinePlayer.getUniqueId(), currentBalance);
 
-                    if (oldBalance == null || oldBalance != currentBalance){
+                    if (oldBalance == null || !oldBalance.equals(currentBalance)){
                         playersToUpdate.add(onlinePlayer);
                     }
 
