@@ -2,6 +2,5 @@ name: PixelmonEconomyBridge
 version: 1.0.7
 author: EverNife
 main: br.com.finalcraft.pixelmoneconomybridge.PixelmonEconomyBridge
-depend: [ Vault ]
-loadbefore: [ EverNifeCore ]
+depend: [ Vault, EverNifeCore ]
 softdepend:  [ FinalEconomy ]

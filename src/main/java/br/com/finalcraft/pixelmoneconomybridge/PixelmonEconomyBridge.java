@@ -74,7 +74,6 @@ public class PixelmonEconomyBridge extends JavaPlugin{
                     }else {
                         PixelonIntegration_v1_16_5.initializeVault();
                     }
-
                     INTEGRATION_TYPE = IntegrationType.GENERIC_VAULT;
                 }
             }
