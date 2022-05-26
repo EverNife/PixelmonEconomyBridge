@@ -1,3 +1,0 @@
-Settings:
-  # These checks are async, but there is no reason to use a value lower than 10 ticks
-  vaultOnly_syncInterval: 10
