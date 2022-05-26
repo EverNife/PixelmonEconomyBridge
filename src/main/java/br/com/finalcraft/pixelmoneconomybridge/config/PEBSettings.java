@@ -14,6 +14,7 @@ public class PEBSettings {
                         "How often (in ticks) will this plugin check on Vault to update the players!" +
                                 "\nThese checks are async, but there is no reason to use a value lower than 10 ticks")
         ).boundLower(1).intValue();
+        ConfigManager.getMainConfig().saveIfNewDefaults();
     }
 
 }
