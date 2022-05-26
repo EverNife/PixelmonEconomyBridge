@@ -1,4 +1,4 @@
-package br.com.finalcraft.pixelmoneconomybridge.vaultonly;
+package br.com.finalcraft.pixelmoneconomybridge.implementation.v1_12_2.vaultonly;
 
 import br.com.finalcraft.evernifecore.integration.VaultIntegration;
 import com.pixelmonmod.pixelmon.api.economy.IPixelmonBankAccount;
@@ -9,7 +9,7 @@ import org.bukkit.OfflinePlayer;
 import java.util.Optional;
 import java.util.UUID;
 
-public class VaultBankAccountManager implements IPixelmonBankAccountManager {
+public class VaultBankAccountManager_v1_12_2 implements IPixelmonBankAccountManager {
 
     @Override
     public Optional<? extends IPixelmonBankAccount> getBankAccount(UUID uuid) {
@@ -19,7 +19,7 @@ public class VaultBankAccountManager implements IPixelmonBankAccountManager {
             VaultIntegration.econ.createPlayerAccount(offlinePlayer);
         }
 
-        return Optional.of(new VaultBankAccount(uuid, offlinePlayer));
+        return Optional.of(new VaultBankAccount_v1_12_2(uuid, offlinePlayer));
     }
 
 }

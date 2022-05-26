@@ -1,15 +1,15 @@
-package br.com.finalcraft.pixelmoneconomybridge.finaleconomy;
+package br.com.finalcraft.pixelmoneconomybridge.implementation.v1_12_2.finaleconomy;
 
 import br.com.finalcraft.finaleconomy.config.data.FEPlayerData;
 import com.pixelmonmod.pixelmon.api.economy.IPixelmonBankAccount;
 
 import java.util.UUID;
 
-public class FEBankAccount implements IPixelmonBankAccount {
+public class FEBankAccount_v1_12_2 implements IPixelmonBankAccount {
 
     private final FEPlayerData playerData;
 
-    public FEBankAccount(FEPlayerData playerData) {
+    public FEBankAccount_v1_12_2(FEPlayerData playerData) {
         this.playerData = playerData;
     }
 

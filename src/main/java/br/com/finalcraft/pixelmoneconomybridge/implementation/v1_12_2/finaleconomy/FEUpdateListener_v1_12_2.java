@@ -1,4 +1,4 @@
-package br.com.finalcraft.pixelmoneconomybridge.finaleconomy;
+package br.com.finalcraft.pixelmoneconomybridge.implementation.v1_12_2.finaleconomy;
 
 import br.com.finalcraft.evernifecore.listeners.base.ECListener;
 import br.com.finalcraft.evernifecore.util.FCScheduller;
@@ -12,7 +12,7 @@ import org.bukkit.event.EventPriority;
 
 import java.util.UUID;
 
-public class FEUpdateListener implements ECListener {
+public class FEUpdateListener_v1_12_2 implements ECListener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onEconomyUpdateEvent(EconomyUpdateEvent event) {

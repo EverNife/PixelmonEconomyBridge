@@ -1,4 +1,4 @@
-package br.com.finalcraft.pixelmoneconomybridge.vaultonly;
+package br.com.finalcraft.pixelmoneconomybridge.implementation.v1_12_2.vaultonly;
 
 import br.com.finalcraft.evernifecore.integration.VaultIntegration;
 import br.com.finalcraft.evernifecore.util.FCScheduller;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
 
-public class VaultUpdaterThread{
+public class VaultUpdaterThread_v1_12_2 {
 
     private static BukkitTask bukkitTask;
     public static HashMap<UUID, Double> PLAYERS_LAST_MONEY_AMOUNT = new HashMap<>();

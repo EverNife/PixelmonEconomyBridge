@@ -1,4 +1,4 @@
-package br.com.finalcraft.pixelmoneconomybridge.listener;
+package br.com.finalcraft.pixelmoneconomybridge.implementation.v1_12_2.listener;
 
 import br.com.finalcraft.evernifecore.api.events.ECFullyLoggedInEvent;
 import br.com.finalcraft.evernifecore.listeners.base.ECListener;
@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class PlayerLoginListener implements ECListener {
+public class PlayerLoginListener_v1_12_2 implements ECListener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerLoginEvent(ECFullyLoggedInEvent event) {

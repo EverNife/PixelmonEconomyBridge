@@ -1,17 +1,14 @@
 package br.com.finalcraft.pixelmoneconomybridge;
 
 import br.com.finalcraft.evernifecore.ecplugin.annotations.ECPlugin;
-import br.com.finalcraft.evernifecore.listeners.base.ECListener;
+import br.com.finalcraft.evernifecore.version.MCVersion;
 import br.com.finalcraft.pixelmoneconomybridge.commands.CommandRegisterer;
 import br.com.finalcraft.pixelmoneconomybridge.config.ConfigManager;
-import br.com.finalcraft.pixelmoneconomybridge.finaleconomy.FEBankAccountManager;
-import br.com.finalcraft.pixelmoneconomybridge.finaleconomy.FEUpdateListener;
+import br.com.finalcraft.pixelmoneconomybridge.implementation.v1_12_2.PixelonIntegration_v1_12_2;
+import br.com.finalcraft.pixelmoneconomybridge.implementation.v1_12_2.vaultonly.VaultUpdaterThread_v1_12_2;
+import br.com.finalcraft.pixelmoneconomybridge.implementation.v1_16_5.PixelonIntegration_v1_16_5;
+import br.com.finalcraft.pixelmoneconomybridge.implementation.v1_16_5.vaultonly.VaultUpdaterThread_v1_16_5;
 import br.com.finalcraft.pixelmoneconomybridge.integration.IntegrationType;
-import br.com.finalcraft.pixelmoneconomybridge.listener.PlayerLoginListener;
-import br.com.finalcraft.pixelmoneconomybridge.vaultonly.VaultBankAccountManager;
-import br.com.finalcraft.pixelmoneconomybridge.vaultonly.VaultLogoutListener;
-import br.com.finalcraft.pixelmoneconomybridge.vaultonly.VaultUpdaterThread;
-import com.pixelmonmod.pixelmon.Pixelmon;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -57,20 +54,27 @@ public class PixelmonEconomyBridge extends JavaPlugin{
                 ConfigManager.initialize(PixelmonEconomyBridge.this);
 
                 info("§aIntegrating Pixelmon to Bukkit...");
-                ECListener.register(PixelmonEconomyBridge.this, PlayerLoginListener.class);
-
                 if (Bukkit.getPluginManager().isPluginEnabled("FinalEconomy")){
                     info("FinalEconomy was found!");
                     info("HighPerformance full-async Instant Synchronization enabled!");
-                    Pixelmon.moneyManager = new FEBankAccountManager();
-                    ECListener.register(PixelmonEconomyBridge.this, FEUpdateListener.class);
+
+                    if (MCVersion.isBellow1_13()){
+                        PixelonIntegration_v1_12_2.initializeFinalEconomy();
+                    }else {
+                        PixelonIntegration_v1_16_5.initializeFinalEconomy();
+                    }
                     INTEGRATION_TYPE = IntegrationType.FINAL_ECONOMY;
+
                 }else {
                     info("Vault was found!");
                     info("Dedicated Thread Delayed Synchronization enabled!");
-                    Pixelmon.moneyManager = new VaultBankAccountManager();
-                    VaultUpdaterThread.initialize();
-                    ECListener.register(PixelmonEconomyBridge.this, VaultLogoutListener.class);
+
+                    if (MCVersion.isBellow1_13()){
+                        PixelonIntegration_v1_12_2.initializeVault();
+                    }else {
+                        PixelonIntegration_v1_16_5.initializeVault();
+                    }
+
                     INTEGRATION_TYPE = IntegrationType.GENERIC_VAULT;
                 }
             }
@@ -82,7 +86,11 @@ public class PixelmonEconomyBridge extends JavaPlugin{
         ConfigManager.initialize(PixelmonEconomyBridge.instance);
         switch (INTEGRATION_TYPE){
             case GENERIC_VAULT:{
-                VaultUpdaterThread.initialize();
+                if (MCVersion.isBellow1_13()){
+                    VaultUpdaterThread_v1_12_2.initialize();
+                }else {
+                    VaultUpdaterThread_v1_16_5.initialize();
+                }
             }
         }
     }
