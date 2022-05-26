@@ -57,6 +57,7 @@ dependencies {
     compile 'br.com.finalcraft:FinalEconomy:1.0.3'
 
     compileOnly name: "Pixelmon-1.12.2-8.3.4-noassets"
+    compileOnly name: "Pixelmon-1.16.5-9.0.0-noassets"
 
     compile 'org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT'
     testCompile group: 'junit', name: 'junit', version: '4.12'
