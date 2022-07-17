@@ -1,6 +1,7 @@
 package br.com.finalcraft.pixelmoneconomybridge.implementation.v1_16_5.vaultonly;
 
 import br.com.finalcraft.evernifecore.integration.VaultIntegration;
+import br.com.finalcraft.pixelmoneconomybridge.config.PEBSettings;
 import com.pixelmonmod.pixelmon.api.economy.BankAccount;
 import org.bukkit.OfflinePlayer;
 
@@ -24,7 +25,11 @@ public class VaultBankAccount_v1_16_5 implements BankAccount {
 
     @Override
     public BigDecimal getBalance() {
-        return BigDecimal.valueOf(VaultIntegration.ecoGet(offlinePlayer));
+        double money = VaultIntegration.ecoGet(offlinePlayer);
+        if (PEBSettings.removeDecimals){
+            money = Math.floor(money);
+        }
+        return BigDecimal.valueOf(money);
     }
 
     @Override

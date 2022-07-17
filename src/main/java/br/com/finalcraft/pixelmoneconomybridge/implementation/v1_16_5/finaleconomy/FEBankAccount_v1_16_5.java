@@ -1,6 +1,7 @@
 package br.com.finalcraft.pixelmoneconomybridge.implementation.v1_16_5.finaleconomy;
 
 import br.com.finalcraft.finaleconomy.config.data.FEPlayerData;
+import br.com.finalcraft.pixelmoneconomybridge.config.PEBSettings;
 import com.pixelmonmod.pixelmon.api.economy.BankAccount;
 
 import java.math.BigDecimal;
@@ -21,7 +22,11 @@ public class FEBankAccount_v1_16_5 implements BankAccount {
 
     @Override
     public BigDecimal getBalance() {
-        return BigDecimal.valueOf(playerData.getMoney());
+        double money = playerData.getMoney();
+        if (PEBSettings.removeDecimals){
+            money = Math.floor(money);
+        }
+        return BigDecimal.valueOf(money);
     }
 
     @Override
