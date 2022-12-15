@@ -44,7 +44,7 @@ public class PixelmonEconomyBridge extends JavaPlugin{
             public void run() {
                 if (!Bukkit.getPluginManager().isPluginEnabled("EverNifeCore")){
                     warning("You need EverNifeCore to run this plugin!");
-                    throw new IllegalArgumentException("EverNifeCore Plugin not Found!");
+                    throw new IllegalStateException("EverNifeCore Plugin not Found!");
                 }
 
                 info("§aRegistering Commands...");
@@ -58,7 +58,7 @@ public class PixelmonEconomyBridge extends JavaPlugin{
                     info("FinalEconomy was found!");
                     info("HighPerformance full-async Instant Synchronization enabled!");
 
-                    if (MCVersion.isBellow1_13()){
+                    if (MCVersion.isEqual(MCVersion.v1_12)){
                         PixelonIntegration_v1_12_2.initializeFinalEconomy();
                     }else {
                         PixelonIntegration_v1_16_5.initializeFinalEconomy();
@@ -69,7 +69,7 @@ public class PixelmonEconomyBridge extends JavaPlugin{
                     info("Vault was found!");
                     info("Dedicated Thread Delayed Synchronization enabled!");
 
-                    if (MCVersion.isBellow1_13()){
+                    if (MCVersion.isEqual(MCVersion.v1_12)){
                         PixelonIntegration_v1_12_2.initializeVault();
                     }else {
                         PixelonIntegration_v1_16_5.initializeVault();
@@ -85,7 +85,7 @@ public class PixelmonEconomyBridge extends JavaPlugin{
         ConfigManager.initialize(PixelmonEconomyBridge.instance);
         switch (INTEGRATION_TYPE){
             case GENERIC_VAULT:{
-                if (MCVersion.isBellow1_13()){
+                if (MCVersion.isEqual(MCVersion.v1_12)){
                     VaultUpdaterThread_v1_12_2.initialize();
                 }else {
                     VaultUpdaterThread_v1_16_5.initialize();

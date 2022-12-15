@@ -17,7 +17,7 @@ public class PEBSettings {
                                 "\nThese checks are async, but there is no reason to use a value lower than 10 ticks")
         ).boundLower(1).intValue();
 
-        if (!MCVersion.isBellow1_13()){
+        if (MCVersion.isEqual(MCVersion.v1_16)){
             removeDecimals = ConfigManager.getMainConfig().getOrSetDefaultValue(
                     "Settings.removeDecimals",
                     true,

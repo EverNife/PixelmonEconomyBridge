@@ -4,3 +4,4 @@ author: EverNife
 main: br.com.finalcraft.pixelmoneconomybridge.PixelmonEconomyBridge
 depend: [ Vault, EverNifeCore ]
 softdepend:  [ FinalEconomy ]
+api-version: 1.13
