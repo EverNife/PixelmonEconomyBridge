@@ -1,7 +1,7 @@
 package br.com.finalcraft.pixelmoneconomybridge.implementation.v1_12_2.finaleconomy;
 
 import br.com.finalcraft.evernifecore.listeners.base.ECListener;
-import br.com.finalcraft.evernifecore.util.FCScheduller;
+import br.com.finalcraft.evernifecore.scheduler.FCScheduler;
 import br.com.finalcraft.finaleconomy.api.events.EconomyUpdateEvent;
 import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.comm.packetHandlers.clientStorage.UpdateClientPlayerData;
@@ -18,7 +18,7 @@ public class FEUpdateListener_v1_12_2 implements ECListener {
     public void onEconomyUpdateEvent(EconomyUpdateEvent event) {
         final UUID uuid = event.getPlayerData().getUniqueId();
         final int newMoney = (int) event.getAmount();
-        FCScheduller.runAssync(() -> {
+        FCScheduler.runAssync(() -> {
             EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(uuid);
             if (player != null){
                 UpdateClientPlayerData updateClientPlayerData = new UpdateClientPlayerData(newMoney);

@@ -1,7 +1,7 @@
 package br.com.finalcraft.pixelmoneconomybridge.implementation.v1_12_2.vaultonly;
 
 import br.com.finalcraft.evernifecore.integration.VaultIntegration;
-import br.com.finalcraft.evernifecore.util.FCScheduller;
+import br.com.finalcraft.evernifecore.scheduler.FCScheduler;
 import br.com.finalcraft.pixelmoneconomybridge.PixelmonEconomyBridge;
 import br.com.finalcraft.pixelmoneconomybridge.config.PEBSettings;
 import com.pixelmonmod.pixelmon.Pixelmon;
@@ -40,7 +40,7 @@ public class VaultUpdaterThread_v1_12_2 {
                 }
 
                 if (playersToUpdate.size() > 0){
-                    FCScheduller.runSync(() -> { //Do sync as we do not know how good this VaultPlugin has created his system
+                    FCScheduler.runSync(() -> { //Do sync as we do not know how good this VaultPlugin has created his system
                         for (Player player : playersToUpdate) {
                             if (player.isOnline()){
                                 Pixelmon.moneyManager.getBankAccount(player.getUniqueId()).ifPresent(iPixelmonBankAccount -> {
