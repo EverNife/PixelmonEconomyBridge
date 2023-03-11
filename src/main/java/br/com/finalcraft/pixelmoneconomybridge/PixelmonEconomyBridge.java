@@ -42,39 +42,43 @@ public class PixelmonEconomyBridge extends JavaPlugin{
         new BukkitRunnable(){
             @Override
             public void run() {
-                if (!Bukkit.getPluginManager().isPluginEnabled("EverNifeCore")){
-                    warning("You need EverNifeCore to run this plugin!");
-                    throw new IllegalStateException("EverNifeCore Plugin not Found!");
-                }
-
-                info("§aRegistering Commands...");
-                CommandRegisterer.registerCommands(PixelmonEconomyBridge.this);
-
-                info("§aLoading up Configurations...");
-                ConfigManager.initialize(PixelmonEconomyBridge.this);
-
-                info("§aIntegrating Pixelmon to Bukkit...");
-                if (Bukkit.getPluginManager().isPluginEnabled("FinalEconomy")){
-                    info("FinalEconomy was found!");
-                    info("HighPerformance full-async Instant Synchronization enabled!");
-
-                    if (MCVersion.isEqual(MCVersion.v1_12)){
-                        PixelonIntegration_v1_12_2.initializeFinalEconomy();
-                    }else {
-                        PixelonIntegration_v1_16_5.initializeFinalEconomy();
+                try {
+                    if (!Bukkit.getPluginManager().isPluginEnabled("EverNifeCore")){
+                        warning("You need EverNifeCore to run this plugin!");
+                        throw new IllegalStateException("EverNifeCore Plugin not Found!");
                     }
-                    INTEGRATION_TYPE = IntegrationType.FINAL_ECONOMY;
 
-                }else {
-                    info("Vault was found!");
-                    info("Dedicated Thread Delayed Synchronization enabled!");
+                    info("§aRegistering Commands...");
+                    CommandRegisterer.registerCommands(PixelmonEconomyBridge.this);
 
-                    if (MCVersion.isEqual(MCVersion.v1_12)){
-                        PixelonIntegration_v1_12_2.initializeVault();
+                    info("§aLoading up Configurations...");
+                    ConfigManager.initialize(PixelmonEconomyBridge.this);
+
+                    info("§aIntegrating Pixelmon to Bukkit...");
+                    if (Bukkit.getPluginManager().isPluginEnabled("FinalEconomy")){
+                        info("FinalEconomy was found!");
+                        info("HighPerformance full-async Instant Synchronization enabled!");
+
+                        if (MCVersion.isEqual(MCVersion.v1_12)){
+                            PixelonIntegration_v1_12_2.initializeFinalEconomy();
+                        }else {
+                            PixelonIntegration_v1_16_5.initializeFinalEconomy();
+                        }
+                        INTEGRATION_TYPE = IntegrationType.FINAL_ECONOMY;
+
                     }else {
-                        PixelonIntegration_v1_16_5.initializeVault();
+                        info("Vault was found!");
+                        info("Dedicated Thread Delayed Synchronization enabled!");
+
+                        if (MCVersion.isEqual(MCVersion.v1_12)){
+                            PixelonIntegration_v1_12_2.initializeVault();
+                        }else {
+                            PixelonIntegration_v1_16_5.initializeVault();
+                        }
+                        INTEGRATION_TYPE = IntegrationType.GENERIC_VAULT;
                     }
-                    INTEGRATION_TYPE = IntegrationType.GENERIC_VAULT;
+                }catch (Throwable e){
+                    e.printStackTrace();
                 }
             }
         }.runTaskLater(this, 1);//Only execute after the entire server is up and running
