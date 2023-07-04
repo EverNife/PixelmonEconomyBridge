@@ -7,7 +7,7 @@ import br.com.finalcraft.pixelmoneconomybridge.PixelmonEconomyBridge;
 import org.bukkit.command.CommandSender;
 
 @FinalCMD(
-        aliases = {"economybridge"}
+        aliases = {"pixelmoneconomybridge","economybridge"}
 )
 public class CMDCoreCommand {
 
