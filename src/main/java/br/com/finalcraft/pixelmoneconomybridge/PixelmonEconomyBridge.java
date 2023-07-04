@@ -1,6 +1,7 @@
 package br.com.finalcraft.pixelmoneconomybridge;
 
 import br.com.finalcraft.evernifecore.ecplugin.annotations.ECPlugin;
+import br.com.finalcraft.evernifecore.logger.ECLogger;
 import br.com.finalcraft.evernifecore.version.MCVersion;
 import br.com.finalcraft.pixelmoneconomybridge.commands.CommandRegisterer;
 import br.com.finalcraft.pixelmoneconomybridge.config.ConfigManager;
@@ -19,45 +20,38 @@ import org.bukkit.scheduler.BukkitRunnable;
 )
 public class PixelmonEconomyBridge extends JavaPlugin{
 
-    public static PixelmonEconomyBridge instance;
-
-    public static void info(String msg){
-        instance.getLogger().info("[Info] " + msg);
+    public static PixelmonEconomyBridge instance; {
+        instance = this;
     }
 
-    public static void debug(String msg){
-        instance.getLogger().info("[Debug] " + msg);
-    }
+    private final ECLogger ecLogger = new ECLogger(this);
+    private transient IntegrationType INTEGRATION_TYPE = null;
 
-    public static void warning(String msg){
-        instance.getLogger().warning("[Warning] " + msg);
+    public static ECLogger getLog(){
+        return instance.ecLogger;
     }
-
-    private IntegrationType INTEGRATION_TYPE = null;
 
     @Override
     public void onEnable() {
-        instance = this;
-
         new BukkitRunnable(){
             @Override
             public void run() {
                 try {
                     if (!Bukkit.getPluginManager().isPluginEnabled("EverNifeCore")){
-                        warning("You need EverNifeCore to run this plugin!");
+                        getLog().warning("You need EverNifeCore to run this plugin!");
                         throw new IllegalStateException("EverNifeCore Plugin not Found!");
                     }
 
-                    info("§aRegistering Commands...");
-                    CommandRegisterer.registerCommands(PixelmonEconomyBridge.this);
+                    getLog().info("§aLoading up Configurations...");
+                    ConfigManager.initialize(PixelmonEconomyBridge.instance);
 
-                    info("§aLoading up Configurations...");
-                    ConfigManager.initialize(PixelmonEconomyBridge.this);
+                    getLog().info("§aRegistering Commands...");
+                    CommandRegisterer.registerCommands(PixelmonEconomyBridge.instance);
 
-                    info("§aIntegrating Pixelmon to Bukkit...");
+                    getLog().info("§aIntegrating Pixelmon to Bukkit...");
                     if (Bukkit.getPluginManager().isPluginEnabled("FinalEconomy")){
-                        info("FinalEconomy was found!");
-                        info("HighPerformance full-async Instant Synchronization enabled!");
+                        getLog().info("FinalEconomy was found!");
+                        getLog().info("HighPerformance full-async Instant Synchronization enabled!");
 
                         if (MCVersion.isEqual(MCVersion.v1_12)){
                             PixelonIntegration_v1_12_2.initializeFinalEconomy();
@@ -67,8 +61,8 @@ public class PixelmonEconomyBridge extends JavaPlugin{
                         INTEGRATION_TYPE = IntegrationType.FINAL_ECONOMY;
 
                     }else {
-                        info("Vault was found!");
-                        info("Dedicated Thread Delayed Synchronization enabled!");
+                        getLog().info("Vault was found!");
+                        getLog().info("Dedicated Thread Delayed Synchronization enabled!");
 
                         if (MCVersion.isEqual(MCVersion.v1_12)){
                             PixelonIntegration_v1_12_2.initializeVault();
@@ -81,7 +75,7 @@ public class PixelmonEconomyBridge extends JavaPlugin{
                     e.printStackTrace();
                 }
             }
-        }.runTaskLater(this, 1);//Only execute after the entire server is up and running
+        }.runTaskLater(this, 100);//Only execute after the entire server is up and running
     }
 
     @ECPlugin.Reload
