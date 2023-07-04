@@ -1,5 +1,5 @@
 name: PixelmonEconomyBridge
-version: 1.0.10
+version: 1.0.11
 author: EverNife
 main: br.com.finalcraft.pixelmoneconomybridge.PixelmonEconomyBridge
 depend: [ Vault, EverNifeCore ]
