@@ -1,0 +1,4 @@
+rootProject.name = 'v1_12_2'
+
+include 'Commons'
+project(':Commons').projectDir = file('../Commons')

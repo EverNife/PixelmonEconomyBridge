@@ -14,7 +14,7 @@ public class ConfigManager {
     public static void initialize(JavaPlugin instance){
         config = new Config(instance, "config.yml");
 
-        PEBSettings.initialize();
+        PEBSettings.initialize(config);
     }
 
 }

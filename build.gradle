@@ -1,64 +1,151 @@
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
-        maven { url = "https://maven.minecraftforge.net/" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
     }
 }
 
-group 'br.com.finalcraft'
-version '1.0.11'
-
 apply plugin: 'java'
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: "com.github.johnrengelman.shadow"
 
-sourceCompatibility = 1.8
+group 'br.com.finalcraft'
+version '1.1.2'
+
 targetCompatibility = 1.8
+sourceCompatibility = 1.8
 
 compileJava.options.encoding = 'UTF-8'
-
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
 repositories {
-    flatDir {
+    flatDir { //Change this to where are your local libs
         dirs 'libs'
-        dirs 'C:/Users/Petrus/Desktop/Meus/workshop/workshop/PublicLibs/Bukkit'
-        dirs 'C:/Users/Petrus/Desktop/Meus/workshop/workshop/PublicLibs'
     }
     mavenCentral()
     maven {
         name = 'spigotmc-repo'
-        url = 'https://hub.spigotmc.org/nexus/content/groups/public/'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'
     }
-    maven { url 'https://jitpack.io' }
-    maven {
-        url = 'https://maven.petrus.dev/public'
-    }
+    maven { url = "https://jitpack.io" }
+    maven { url = "https://maven.petrus.dev/public" }
 }
-
-
-minecraft {
-    version = "1.12.2-14.23.5.2847"
-    runDir = "run"
-
-    mappings = "stable_39"
-    makeObfSourceJar = false
-}
-
 
 dependencies {
-    compile "com.github.MilkBowl:VaultAPI:1.7"
+    compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
+    compileOnly 'br.com.finalcraft:EverNifeCore:2.0.3'
 
-    compile 'br.com.finalcraft:EverNifeCore:2.0.3'
-    compile 'br.com.finalcraft:FinalEconomy:1.0.3'
+    compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
+    compileOnly 'br.com.finalcraft:FinalEconomy:1.0.3'
 
-    compileOnly name: "Pixelmon-1.12.2-8.4.3-noassets"
-    compileOnly name: "Pixelmon-1.16.5-9.1.0-noassets"
+    implementation project(':modules:Commons')
+    implementation fileTree(dir: 'libs', include: ['*.jar']) // Include all .jar files in the 'libs' directory
 
-    compile 'org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    //Annotations
+    compileOnly 'org.jetbrains:annotations:23.0.0'
+
+    //Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+}
+
+
+def projects = [
+        'modules/v1_12_2',
+        'modules/v1_16_5',
+        'modules/v1_20_2',
+]
+
+task buildAndMoveJars {
+    doLast {
+        // Define the projects to be built and moved
+
+        // List to store the paths of the built JAR files
+        def jarFiles = []
+
+        projects.each { project ->
+
+            // Execute the Gradle build for the project
+            println("[PROJECT_COMPAT] Building project: ${project}")
+
+            def gradlewBat = System.getProperty('os.name').toLowerCase().contains('windows')
+                    ? 'gradlew.bat'
+                    : 'gradlew'
+
+            def buildResult = exec {
+                // Use the Gradle Wrapper in the project directory
+                workingDir project
+                commandLine gradlewBat, 'build'
+            }
+
+            // Check if the build was successful
+            if (buildResult.exitValue == 0) {
+                println("[PROJECT_COMPAT] Build Completed")
+
+                // Get the built JAR file
+                def jarName = "${project.substring(project.lastIndexOf('/') + 1)}-COMPAT.jar";
+                def jarFile = file("$project/build/libs/${jarName}")
+
+                println("[PROJECT_COMPAT] Moving jar '${jarName}' to 'libs' directory")
+
+                def tempDir = file("libs")
+                tempDir.mkdirs()
+                def targetFile = file("$tempDir/${jarName}")
+                jarFile.renameTo(targetFile)
+
+                //Add to jarFiles list
+                jarFiles.add(targetFile)
+            } else {
+                // Print an error message if the build failed
+                println "Build failed for project: $project"
+            }
+        }
+
+    }
+}
+
+clean{
+    doLast {
+        fileTree(dir: 'libs', include: '**/*-COMPAT.jar').each { file ->
+            file.delete()
+        }
+
+        projects.each { project ->
+
+            // Execute the Gradle build for the project
+            println("[PROJECT_COMPAT] Clean project: ${project}")
+
+            def gradlewBat = System.getProperty('os.name').toLowerCase().contains('windows')
+                    ? 'gradlew.bat'
+                    : 'gradlew'
+
+            def cleanResult = exec {
+                // Use the Gradle Wrapper in the project directory
+                workingDir project
+                commandLine gradlewBat, 'clean'
+            }
+
+            // Check if the build was successful
+            if (cleanResult.exitValue == 0) {
+                println("[PROJECT_COMPAT] Clean Completed")
+            } else {
+                // Print an error message if the build failed
+                println "Clean failed for project: $project"
+            }
+        }
+
+    }
+}
+
+shadowJar {
+    archiveName = "${baseName}-${version}.${extension}"
+}
+
+jar {
+    enabled = false //Disable default jar, only shadow jar will be created
+    dependsOn(buildAndMoveJars)
+    dependsOn(shadowJar { classifier = null })
 }
