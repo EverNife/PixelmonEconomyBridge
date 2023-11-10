@@ -29,17 +29,14 @@ minecraft {
 }
 
 repositories {
+    jcenter()
+    mavenCentral()
     flatDir {
         dirs 'libs'
     }
-    mavenCentral()
-    maven {
-        name = 'spigotmc-repo'
-        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'
-    }
-    maven {
-        url = "https://maven.petrus.dev/public"
-    }
+    maven { url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots" }
+    maven { url = "https://jitpack.io" }
+    maven { url = "https://maven.petrus.dev/public" }
 }
 
 dependencies {
