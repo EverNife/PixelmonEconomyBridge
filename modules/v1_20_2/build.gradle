@@ -1,0 +1,68 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.neoforged.net/releases' }
+        jcenter()
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'java'
+    id 'idea'
+    id 'net.neoforged.gradle' version '[6.0.18,6.2)'
+}
+
+group 'br.com.finalcraft'
+version 'COMPAT'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    copyIdeResources = true
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    mavenCentral()
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots'
+    }
+    maven {
+        url = "https://maven.petrus.dev/public"
+    }
+}
+
+dependencies {
+    minecraft 'net.neoforged:forge:1.20.1-47.1.5'
+
+    compileOnly 'org.spigotmc:spigot-api:1.20.2-R0.1-SNAPSHOT'
+    compileOnly "br.com.finalcraft:EverNifeCore:2.0.3"
+    compileOnly name: "Pixelmon-1.20.2-9.2.5-universal-noAssets"
+
+    compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
+    compileOnly 'br.com.finalcraft:FinalEconomy:1.0.3'
+
+    compileOnly project('Commons')
+
+    implementation 'org.apache.commons:commons-lang3:3.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+
+    //Annotations
+    compileOnly 'org.jetbrains:annotations:24.0.0'
+
+    //Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+}
