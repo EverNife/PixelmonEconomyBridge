@@ -1,13 +1,13 @@
-package br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_2.reforged.factory;
+package br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_R1.reforged.factory;
 
 import br.com.finalcraft.evernifecore.listeners.base.ECListener;
 import br.com.finalcraft.pixelmoneconomybridge.common.factory.PixelmonEconomyFactory;
-import br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_2.reforged.finaleconomy.FEBankAccountManager;
-import br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_2.reforged.finaleconomy.FEUpdateListener;
-import br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_2.reforged.listener.PlayerLoginListener;
-import br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_2.reforged.vaultonly.VaultBankAccountManager;
-import br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_2.reforged.vaultonly.VaultLogoutListener;
-import br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_2.reforged.vaultonly.VaultUpdaterThread;
+import br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_R1.reforged.finaleconomy.FEBankAccountManager;
+import br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_R1.reforged.finaleconomy.FEUpdateListener;
+import br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_R1.reforged.listener.PlayerLoginListener;
+import br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_R1.reforged.vaultonly.VaultBankAccountManager;
+import br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_R1.reforged.vaultonly.VaultLogoutListener;
+import br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_R1.reforged.vaultonly.VaultUpdaterThread;
 import com.pixelmonmod.pixelmon.Pixelmon;
 import org.bukkit.plugin.java.JavaPlugin;
 

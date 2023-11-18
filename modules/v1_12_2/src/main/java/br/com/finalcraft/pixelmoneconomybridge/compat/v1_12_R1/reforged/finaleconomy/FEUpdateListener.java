@@ -1,4 +1,4 @@
-package br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_2.reforged.finaleconomy;
+package br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_R1.reforged.finaleconomy;
 
 import br.com.finalcraft.evernifecore.listeners.base.ECListener;
 import br.com.finalcraft.evernifecore.scheduler.FCScheduler;

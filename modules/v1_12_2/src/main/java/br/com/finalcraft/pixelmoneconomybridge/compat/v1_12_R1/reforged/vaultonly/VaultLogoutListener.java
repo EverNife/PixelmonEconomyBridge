@@ -1,4 +1,4 @@
-package br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_2.reforged.vaultonly;
+package br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_R1.reforged.vaultonly;
 
 import br.com.finalcraft.evernifecore.listeners.base.ECListener;
 import org.bukkit.event.EventHandler;

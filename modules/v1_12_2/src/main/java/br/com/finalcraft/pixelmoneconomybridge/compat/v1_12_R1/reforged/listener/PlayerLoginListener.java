@@ -1,4 +1,4 @@
-package br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_2.reforged.listener;
+package br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_R1.reforged.listener;
 
 import br.com.finalcraft.evernifecore.api.events.ECFullyLoggedInEvent;
 import br.com.finalcraft.evernifecore.listeners.base.ECListener;

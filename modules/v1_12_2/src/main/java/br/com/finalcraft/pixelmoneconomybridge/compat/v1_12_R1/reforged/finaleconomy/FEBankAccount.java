@@ -1,4 +1,4 @@
-package br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_2.reforged.finaleconomy;
+package br.com.finalcraft.pixelmoneconomybridge.compat.v1_12_R1.reforged.finaleconomy;
 
 import br.com.finalcraft.finaleconomy.config.data.FEPlayerData;
 import com.pixelmonmod.pixelmon.api.economy.IPixelmonBankAccount;
