@@ -18,7 +18,7 @@ public class FEUpdateListener implements ECListener {
     public void onEconomyUpdateEvent(EconomyUpdateEvent event) {
         final UUID uuid = event.getPlayerData().getUniqueId();
         final int newMoney = (int) event.getAmount();
-        FCScheduler.runAssync(() -> {
+        FCScheduler.runAsync(() -> {
             EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(uuid);
             if (player != null){
                 UpdateClientPlayerData updateClientPlayerData = new UpdateClientPlayerData(newMoney);

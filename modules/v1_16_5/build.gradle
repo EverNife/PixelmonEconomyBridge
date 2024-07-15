@@ -42,7 +42,7 @@ minecraft {
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.34'
-    compileOnly "br.com.finalcraft:EverNifeCore:2.0.3"
+    compileOnly "br.com.finalcraft:EverNifeCore:2.0.4"
     compileOnly name: "Pixelmon-1.16.5-9.1.4-universal-noAssets"
 
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7'

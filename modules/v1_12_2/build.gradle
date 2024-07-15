@@ -45,10 +45,10 @@ minecraft {
 
 dependencies {
     compileOnly 'org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT'
-    compileOnly "br.com.finalcraft:EverNifeCore:2.0.3"
+    compileOnly "br.com.finalcraft:EverNifeCore:2.0.4"
     compileOnly name: "Pixelmon-1.12.2-8.4.3-noassets"
 
-    compile 'br.com.finalcraft:EverNifeCore:2.0.3'
+    compile 'br.com.finalcraft:EverNifeCore:2.0.4'
 
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
     compileOnly 'br.com.finalcraft:FinalEconomy:1.0.3'
