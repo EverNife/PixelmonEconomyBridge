@@ -1,6 +1,7 @@
 package br.com.finalcraft.pixelmoneconomybridge.common.factory;
 
 import br.com.finalcraft.evernifecore.util.FCReflectionUtil;
+import br.com.finalcraft.evernifecore.version.MCDetailedVersion;
 import br.com.finalcraft.evernifecore.version.MCVersion;
 import org.bukkit.plugin.java.JavaPlugin;
 
