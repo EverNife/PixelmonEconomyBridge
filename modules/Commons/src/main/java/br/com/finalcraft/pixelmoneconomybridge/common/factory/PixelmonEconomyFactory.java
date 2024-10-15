@@ -13,8 +13,13 @@ public abstract class PixelmonEconomyFactory {
     }
 
     public static PixelmonEconomyFactory create(IntegrationType integrationType){
+
+        String versionName = MCVersion.isEqual(MCVersion.v1_20)
+                ? MCDetailedVersion.v1_20_R2.name() //Enforce 1.20.2 path when in 1.20.x
+                : MCVersion.getCurrent().name();
+
         return (PixelmonEconomyFactory) FCReflectionUtil.getConstructor(
-                "br.com.finalcraft.pixelmoneconomybridge.compat." + MCVersion.getCurrent().name() +".reforged.factory.PixelmonEconomyFactoryImpl",
+                "br.com.finalcraft.pixelmoneconomybridge.compat." + versionName +".reforged.factory.PixelmonEconomyFactoryImpl",
                 IntegrationType.class
         ).invoke(integrationType);
     }
