@@ -15,9 +15,15 @@ public abstract class PixelmonEconomyFactory {
 
     public static PixelmonEconomyFactory create(IntegrationType integrationType){
 
-        String versionName = MCVersion.isEqual(MCVersion.v1_20)
-                ? MCDetailedVersion.v1_20_R2.name() //Enforce 1.20.2 path when in 1.20.x
-                : MCVersion.getCurrent().name();
+        String versionName = MCVersion.getCurrent().name();
+
+        if (MCVersion.isEqual(MCVersion.v1_20)){
+            versionName = MCDetailedVersion.v1_20_R2.name(); // Enforce 1.20.2 path when in 1.20.x
+        }
+
+        if (MCVersion.isEqual(MCVersion.v1_21)){
+            versionName = MCDetailedVersion.v1_21_R1.name(); // Enforce 1.21.1 path when in 1.21.x
+        }
 
         return (PixelmonEconomyFactory) FCReflectionUtil.getConstructor(
                 "br.com.finalcraft.pixelmoneconomybridge.compat." + versionName +".reforged.factory.PixelmonEconomyFactoryImpl",

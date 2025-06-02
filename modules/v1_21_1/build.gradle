@@ -1,0 +1,83 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.neoforged.net/releases' }
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev' version '2.0.89'
+}
+
+group 'br.com.finalcraft'
+version 'COMPAT'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+neoForge {
+    // We currently only support NeoForge versions later than 21.0.x
+    // See https://projects.neoforged.net/neoforged/neoforge for the latest updates
+    version = "21.1.174"
+
+    // Validate AT files and raise errors when they have invalid targets
+    // This option is false by default, but turning it on is recommended
+    validateAccessTransformers = true
+
+    runs {
+        client {
+            client()
+        }
+        data {
+            data()
+        }
+        server {
+            server()
+        }
+    }
+
+    mods {
+        testproject {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+    maven { url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots" }
+    maven { url = "https://jitpack.io" }
+    maven { url = "https://maven.petrus.dev/public" }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT'
+    compileOnly "br.com.finalcraft:EverNifeCore:2.0.4"
+    compileOnly name: "Pixelmon-1.21.1-9.3.0-universal-noAssets"
+
+    compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
+    compileOnly 'br.com.finalcraft:FinalEconomy:1.0.3'
+
+    compileOnly project('Commons')
+
+    implementation 'org.apache.commons:commons-lang3:3.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+
+    //Annotations
+    compileOnly 'org.jetbrains:annotations:24.0.0'
+
+    //Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+}
