@@ -7,6 +7,8 @@
 
 # PixelmonEconomyBridge
 
+Supported Minecraft Versions: **1.12.2** | **1.16.5** | **1.20.x** | **1.21.x**
+
 A plugin de that creates a bridge between Pixelmon economy system and Bukkit.
 
 On bukkit there is no 'EconomyUpdateEvent' so you might need a plugin that has it, like FinalEconomy
@@ -15,5 +17,5 @@ So. In order to use this plugin you need:
 
 + [Vault Plugin](https://www.spigotmc.org/resources/vault.34315/)
 + [EverNifeCore Plugin](https://github.com/evernife/EverNifeCore)
-+ Any other economy manager plugin like Essentials, CMI, or the best option for increased performance, [FinalEconomy](https://github.com/evernife/FinalEconomy
++ Any other economy manager plugin like Essentials, CMI, or for example a simple economy plugin [FinalEconomy](https://github.com/evernife/FinalEconomy
   )

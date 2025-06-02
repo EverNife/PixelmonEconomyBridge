@@ -53,24 +53,20 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.24'
 }
 
-
-def projects = [
-        'modules/v1_12_2',
-        'modules/v1_16_5',
-        'modules/v1_20_2',
+// Define your projects with their respective JAVA_HOME versions
+def projectsWithJava = [
+        'modules/v1_12_2': System.getenv('JAVA_HOME'), //Java 8
+        'modules/v1_16_5': System.getenv('JAVA_HOME'), //Java 8
+        'modules/v1_20_2': System.getenv('JAVA_HOME'), //Java 8
+        'modules/v1_21_1': 'C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.6.7-hotspot\\',
 ]
 
 task buildAndMoveJars {
     doLast {
-        // Define the projects to be built and moved
-
-        // List to store the paths of the built JAR files
         def jarFiles = []
 
-        projects.each { project ->
-
-            // Execute the Gradle build for the project
-            println("[PROJECT_COMPAT] Building project: ${project}")
+        projectsWithJava.each { project, javaHome ->
+            println("[PROJECT_COMPAT] Building project: ${project} with JAVA_HOME=${javaHome}")
 
             def gradlewBat = System.getProperty('os.name').toLowerCase().contains('windows')
                     ? 'gradlew.bat'
@@ -80,44 +76,45 @@ task buildAndMoveJars {
                 // Use the Gradle Wrapper in the project directory
                 workingDir project
                 commandLine gradlewBat, 'build'
+                environment 'JAVA_HOME', javaHome
+                environment 'PATH', "${javaHome}/bin" + File.pathSeparator + System.getenv("PATH")
+                ignoreExitValue = true
             }
 
-            // Check if the build was successful
             if (buildResult.exitValue == 0) {
                 println("[PROJECT_COMPAT] Build Completed")
 
-                // Get the built JAR file
-                def jarName = "${project.substring(project.lastIndexOf('/') + 1)}-COMPAT.jar";
+                def projectName = project.substring(project.lastIndexOf('/') + 1)
+                def jarName = "${projectName}-COMPAT.jar"
                 def jarFile = file("$project/build/libs/${jarName}")
 
                 println("[PROJECT_COMPAT] Moving jar '${jarName}' to 'libs' directory")
 
                 def tempDir = file("libs")
                 tempDir.mkdirs()
-                def targetFile = file("$tempDir/${jarName}")
+                def targetFile = file("${tempDir}/${jarName}")
                 jarFile.renameTo(targetFile)
 
                 //Add to jarFiles list
                 jarFiles.add(targetFile)
             } else {
                 // Print an error message if the build failed
-                println "Build failed for project: $project"
+                println "[PROJECT_COMPAT] Build failed for project: $project"
             }
         }
-
     }
 }
 
-clean{
+clean {
     doLast {
+        // Delete generated COMPAT JARs
         fileTree(dir: 'libs', include: '**/*-COMPAT.jar').each { file ->
             file.delete()
         }
 
-        projects.each { project ->
-
-            // Execute the Gradle build for the project
-            println("[PROJECT_COMPAT] Clean project: ${project}")
+        // Clean each project with its specific JAVA_HOME
+        projectsWithJava.each { project, javaHome ->
+            println("[PROJECT_COMPAT] Cleaning project: ${project} with JAVA_HOME=${javaHome}")
 
             def gradlewBat = System.getProperty('os.name').toLowerCase().contains('windows')
                     ? 'gradlew.bat'
@@ -127,6 +124,9 @@ clean{
                 // Use the Gradle Wrapper in the project directory
                 workingDir project
                 commandLine gradlewBat, 'clean'
+                environment 'JAVA_HOME', javaHome
+                environment 'PATH', "${javaHome}/bin" + File.pathSeparator + System.getenv("PATH")
+                ignoreExitValue = true
             }
 
             // Check if the build was successful
@@ -134,10 +134,9 @@ clean{
                 println("[PROJECT_COMPAT] Clean Completed")
             } else {
                 // Print an error message if the build failed
-                println "Clean failed for project: $project"
+                println "[PROJECT_COMPAT] Clean failed for project: $project"
             }
         }
-
     }
 }
 
