@@ -7,6 +7,10 @@
 
 # PixelmonEconomyBridge
 
+<p align="center">
+  <a href="https://realisticnode.com/evernife"><img src="icon/realisticnode-banner.png" alt="RealisticNode - 10% off with code EVERNIFE" /></a>
+</p>
+
 Supported Minecraft Versions: **1.12.2** | **1.16.5** | **1.20.x** | **1.21.x**
 
 A plugin de that creates a bridge between Pixelmon economy system and Bukkit.
